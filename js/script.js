@@ -83,6 +83,8 @@
 
         for (let article of articles) {
             const articleId = article.getAttribute('id');
+
+            const articleTitle = article.querySelector(optTitleSelector).innerHTML;
         }
 
         // const articles = document.querySelectorAll('.posts article');
