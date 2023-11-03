@@ -1,25 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Krytykawy</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
     <div class="blog">
         <div class="container">
-            <h1 class="logo">my blog</h1>
+            <h1 class="logo">Krytykawy</h1>
+            <h4 class="description">raz czarna, raz biała</h4>
             <main class="wrapper">
                 <aside class="sidebar">
-                    <h2 class="section-title">All posts</h2>
+                    <h2 class="section-title">Kawiarnie</h2>
                     <ul class="list titles"></ul>
                 </aside>
+                <section class="options">
+                    <div class="choose cafes">
+                        <label for="cafe-select">Kawiarnie</label>
+
+                        <select id="cafe-select">
+                            <option value="przystan_na_kawe">Przystań na kawę</option>
+                            <option value="buenas_buenas">Buenas buenas</option>
+                            <option value="chodza_sluchy">Chodzą słuchy</option>
+                            <option value="mozaika">Mozaika</option>
+                            <option value="miejsce">Miejsce</option>
+                            <option value="qualia_-_winyle_i_kawa">Qualia - winyle i kawa</option>
+                            <option value="alternatywnie">Alternatywnie</option>
+                            <option value="tokawa_dubois">ToKawa Dubois</option>
+                            <option value="tokawa_pogodno">ToKawa Pogodno</option>
+                            <option value="lokalnie">Lokalnie</option>
+                        </select>
+                    </div>
+                    <div class="choose tags">
+                        <label for="tag-select">Tagi</label>
+
+                        <select id="tag-select">
+                            <option value="specialty">specialty</option>
+                            <option value="filtry">filtry</option>
+                            <option value="espresso">espresso</option>
+                            <option value="przytulnie">przytulnie</option>
+                            <option value="do_pracy">do pracy</option>
+                        </select>
+                    </div>
+                    <div class="choose cities">
+                        <label for="city-select">Miasta</label>
+
+                        <select id="city-select">
+                            <option value="szczecin">Szczecin</option>
+                            <option value="poznan">Poznań</option>
+                            <option value="wroclaw">Wrocław</option>
+                            <option value="krakow">Kraków</option>
+                        </select>
+                    </div>
+                </section>
                 <section class="posts">
                     <article class="post active" id="article-1">
-                        <h3 class="post-title">Article 1</h3>
+                        <h3 class="post-title">Przystań na kawę</h3>
                         <p class="post-author">by Marion Berry</p>
                         <div class="post-content">
                             <p>Duis non dolor efficitur erat interdum fringilla a lobortis dolor. Aenean in massa
@@ -41,7 +81,7 @@
                         </div>
                     </article>
                     <article class="post" id="article-2">
-                        <h3 class="post-title">Article 2</h3>
+                        <h3 class="post-title">Buenas buenas</h3>
                         <p class="post-author">by Theo Tabby</p>
                         <div class="post-content">
                             <p>Phasellus sollicitudin, arcu vel iaculis ullamcorper, quam leo viverra orci, et faucibus
@@ -63,7 +103,7 @@
                         </div>
                     </article>
                     <article class="post" id="article-3">
-                        <h3 class="post-title">Article 3</h3>
+                        <h3 class="post-title">Chodzą słuchy</h3>
                         <p class="post-author">by George Tuxedo</p>
                         <div class="post-content">
                             <p>Mauris vel pellentesque turpis, ac sodales nisl. Quisque iaculis mi velit, ut convallis
@@ -84,7 +124,7 @@
                         </div>
                     </article>
                     <article class="post" id="article-4">
-                        <h3 class="post-title">Article 4</h3>
+                        <h3 class="post-title">Mozaika</h3>
                         <p class="post-author">by Kitty Toebean</p>
                         <div class="post-content">
                             <p>Morbi vel cursus nulla, vel varius mauris. Suspendisse sed elit sit amet risus faucibus
@@ -106,7 +146,7 @@
                         </div>
                     </article>
                     <article class="post" id="article-5">
-                        <h3 class="post-title">Article 5</h3>
+                        <h3 class="post-title">Miejsce</h3>
                         <p class="post-author">by Marion Berry</p>
                         <div class="post-content">
                             <p>Suspendisse sem eros, euismod condimentum arcu ac, consequat fermentum orci. Nam
@@ -126,7 +166,7 @@
                         </div>
                     </article>
                     <article class="post" id="article-6">
-                        <h3 class="post-title">Article 6</h3>
+                        <h3 class="post-title">Qualia - winyle i kawa</h3>
                         <p class="post-author">by George Tuxedo</p>
                         <div class="post-content">
                             <p>Donec posuere iaculis ante sed hendrerit. Lorem ipsum dolor sit amet, consectetur
@@ -148,7 +188,7 @@
                         </div>
                     </article>
                     <article class="post" id="article-7">
-                        <h3 class="post-title">Article 7</h3>
+                        <h3 class="post-title">Alternatywnie</h3>
                         <p class="post-author">by Kitty Toebean</p>
                         <div class="post-content">
                             <p>Donec eleifend mauris ac nisl fermentum, ac fermentum turpis dignissim. Aliquam diam
@@ -169,7 +209,7 @@
                         </div>
                     </article>
                     <article class="post" id="article-8">
-                        <h3 class="post-title">Article 8</h3>
+                        <h3 class="post-title">ToKawa Dubois</h3>
                         <p class="post-author">by Theo Tabby</p>
                         <div class="post-content">
                             <p>Praesent quis imperdiet erat. Curabitur tempor sapien a interdum malesuada. Proin libero
@@ -192,7 +232,7 @@
                         </div>
                     </article>
                     <article class="post" id="article-9">
-                        <h3 class="post-title">Article 9</h3>
+                        <h3 class="post-title">ToKawa Pogodno</h3>
                         <p class="post-author">by Marion Berry</p>
                         <div class="post-content">
                             <p>Tam et facilisis purus. Donec vulputate est quis lobortis posuere. Nunc vitae lorem ut
@@ -214,7 +254,7 @@
                         </div>
                     </article>
                     <article class="post" id="article-10">
-                        <h3 class="post-title">Article 10</h3>
+                        <h3 class="post-title">Lokalnie</h3>
                         <p class="post-author">by George Tuxedo</p>
                         <div class="post-content">
                             <p>Aliquam erat volutpat. Ut non eleifend lectus. Donec suscipit tellus tempor, ornare dui
@@ -242,34 +282,34 @@
                     </article>
                 </section>
                 <aside class="sidebar">
-                    <h2 class="section-title">Tags</h2>
+                    <h2 class="section-title">Tagi</h2>
                     <ul class="list tags">
-                        <li><a href="#">design</a> <span>(6)</span></li>
-                        <li><a href="#">code</a> <span>(5)</span></li>
-                        <li><a href="#">tutorials</a> <span>(4)</span></li>
-                        <li><a href="#">reviews</a> <span>(4)</span></li>
-                        <li><a href="#">news</a> <span>(6)</span></li>
+                        <li><a href="#">specialty</a> <span>(6)</span></li>
+                        <li><a href="#">filtry</a> <span>(5)</span></li>
+                        <li><a href="#">espresso</a> <span>(4)</span></li>
+                        <li><a href="#">przytulnie</a> <span>(4)</span></li>
+                        <li><a href="#">do pracy</a> <span>(6)</span></li>
                     </ul>
-                    <h2 class="section-title">Authors</h2>
+                    <h2 class="section-title">Miasta</h2>
                     <ul class="list authors">
                         <li>
                             <a href="#">
-                                <span class="author-name">Kitty Toebean</span>
+                                <span class="author-name">Szczecin</span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <span class="author-name">Theo Tabby</span>
+                                <span class="author-name">Poznań</span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <span class="author-name">George Tuxedo</span>
+                                <span class="author-name">Wrocław</span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <span class="author-name">Marion Berry</span>
+                                <span class="author-name">Kraków</span>
                             </a>
                         </li>
                     </ul>
