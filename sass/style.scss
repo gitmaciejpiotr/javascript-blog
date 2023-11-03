@@ -24,12 +24,13 @@ body {
   font-weight: 300;
   font-size: 16px;
   line-height: 1.7;
+  margin: 0;
 }
 
 .container {
   max-width: 1140px;
   margin: 0 auto;
-  margin-bottom: 40px;
+  margin-bottom: 96px;
 }
 
 .section-title {
@@ -171,6 +172,35 @@ body {
   }
 }
 
+/* Footer */
+
+footer {
+  background: $color-dark;
+  color: $color-light;
+  display: flex;
+  justify-content: center;
+}
+
+footer div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 60%;
+}
+
+/* Media quires */
+
+@media (max-width: 768px) {
+  footer div {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .container {
+    margin-bottom: 64px;
+  }
+}
+
 @media (max-width: 992px) {
   .wrapper {
     flex-direction: column;
@@ -206,5 +236,9 @@ body {
 
   .posts {
     padding-bottom: 400px;
+  }
+
+  footer div {
+    width: 80%;
   }
 }
