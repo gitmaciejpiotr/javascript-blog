@@ -51,12 +51,6 @@
         correctArticle.classList.add('active');
     }
 
-    const links = document.querySelectorAll('.titles a');
-
-    for (let link of links) {
-        link.addEventListener('click', titleClickHandler);
-    }
-
     const optArticleSelector = '.post',
         optTitleSelector = '.post-title',
         optTitleListSelector = '.titles';
@@ -80,26 +74,29 @@
         /* paste created html code to list of links in left column */
 
         const articles = document.querySelectorAll(optArticleSelector);
+        let html = '';
 
         for (let article of articles) {
             const articleId = article.getAttribute('id');
 
             const articleTitle = article.querySelector(optTitleSelector).innerHTML;
+
+            const linkHTML  = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+
+            html = html + linkHTML;
+
+            console.log(html);
         }
 
-        // const articles = document.querySelectorAll('.posts article');
-
-        // for (let article of articles) {
-        //     const articleID = article.getAttribute('id');
-
-        //     const articleTitle = article.querySelector('.post-title').innerHTML;
-
-        //     const htmlCode = '<li><a href="' + articleID + '"><span>' + articleTitle + '</span></a></li>';
-
-        //     document.querySelector('.titles').innerHTML += htmlCode;
-        // }
+        titleList.innerHTML = html;
 
     }
 
     generateTitleLinks();
+
+    const links = document.querySelectorAll('.titles a');
+
+    for (let link of links) {
+        link.addEventListener('click', titleClickHandler);
+    }
 }
