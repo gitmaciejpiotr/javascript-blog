@@ -108,6 +108,10 @@ body {
     font-weight: bold;
   }
 
+  li {
+    margin: 0 4px 0 4px;
+  }
+
   li a {
     text-decoration: none;
     transition: all 0.05s;
@@ -134,12 +138,24 @@ body {
   }
 }
 
-/* Authors */
+/* Grades */
 
-.authors {
+.grades {
   li {
     margin-bottom: 12px;
   }
+}
+
+.post-givenGrade {
+  text-transform: uppercase;
+  text-shadow: 1px 1px black;
+  font-size: 20px;
+}
+
+.post-givenGrade .question {
+  text-transform: none;
+  text-shadow: none;
+  font-size: 18px;
 }
 
 /* Post */
