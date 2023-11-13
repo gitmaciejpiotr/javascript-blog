@@ -165,7 +165,7 @@
   
   const addClickListenersToTags = function(){
     /* find all links to tags */
-    const linksToTags = document.querySelectorAll('.post-tags .list li')
+    const linksToTags = document.querySelectorAll('.post-tags .list li');
 
     /* START LOOP: for each link */
     for (let linkToTag of linksToTags){
@@ -186,7 +186,7 @@
 
     /* START LOOP: for every article: */
     for (let article of articlesAll) {
-      /* find tags wrapper */
+      /* find grade wrapper */
       const wrapper = article.querySelector(optArticleAuthorSelector);
 
       /* make html variable with empty string */
@@ -196,12 +196,10 @@
       const grade = article.getAttribute('data-grade');
   
       /* generate HTML of the link */
-      const linkHTML  = '<span> ' + grade + '</span>';
+      const linkHTML  = '<a href="#grade-' + grade + '">' + grade + '</a>';
   
       /* add generated code to html variable */
       html = html + linkHTML;
-      
-      /* END LOOP: for each tag */
   
       /* insert HTML of all the links into the tags wrapper */
       wrapper.innerHTML = wrapper.innerHTML + html;
@@ -212,7 +210,11 @@
   
   generateGrades();
 
-  /* Write function addClickListenersToAuthors similar to addClickListenersToTags func */
 
-  /* Write function authorClickHandler similar to tagClickHandler func */
+  /* Write function gradeClickHandler similar to tagClickHandler func */
+
+
+  /* Write function addClickListenersToGrades similar to addClickListenersToTags func */
+  
+
 }
