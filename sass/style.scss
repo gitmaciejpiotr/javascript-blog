@@ -140,9 +140,14 @@ body {
 
 /* Grades */
 
-.grades {
-  li {
-    margin-bottom: 12px;
+.post-givenGrade {
+  a {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 20px;
+  }
+  span {
+    font-size: 18px;
   }
 }
 

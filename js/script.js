@@ -214,7 +214,52 @@
   /* Write function gradeClickHandler similar to tagClickHandler func */
 
 
+  const gradeClickHandler = function(event){
+    /* prevent default action for this event */
+    event.preventDefault();
+  
+    /* make new constant named "clickedElement" and give it the value of "this" */
+    const clickedElement = this;
+    const aElement = clickedElement.querySelector('a');
+  
+    /* make a new constant "href" and read the attribute "href" of the clicked element */
+    const href = aElement.getAttribute('href');
+  
+    /* make a new constant "grade" and extract tag from the "href" constant [???] */
+    const grade = href.replace('#grade-', '');
+  
+    /* find all tag links with "href" attribute equal to the "href" constant */
+    const sameGradeLinks = document.querySelectorAll('a[href="' + grade + '"]');
+  
+    /* START LOOP: for each found tag link */
+    for (let tagLink of sameGradeLinks){
+      /* add class active */
+      tagLink.classList.add('active');
+    }
+    /* END LOOP: for each found tag link */
+  
+    /* execute function "generateTitleLinks" with article selector as argument */
+    generateTitleLinks('[data-grade="' + grade + '"]');
+    addTitleClickHandlerToLinks();
+  };
+
+
   /* Write function addClickListenersToGrades similar to addClickListenersToTags func */
   
+
+  const addClickListenersToGrades = function(){
+    /* find all links to grades */
+    const linksToGrades = document.querySelectorAll('.post .post-givenGrade');
+
+    /* START LOOP: for each link */
+    for (let linkToGrade of linksToGrades){
+      /* add tagClickHandler as event listener for that link */
+      linkToGrade.addEventListener('click', gradeClickHandler);
+    }
+    /* END LOOP: for each link */
+
+  };
+  
+  addClickListenersToGrades();
 
 }
