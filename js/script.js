@@ -113,44 +113,7 @@
   };
 
   const calculateTagClass = function (count, params) {
-    /* Calculate difference between params */
-    const diff = params.max - params.min + 1;
-    let range = 1,
-      classCountForRangeOf1 = optCloudClassCount;
-
-    /* Check if class count do not have to be changed */
-    if (diff <= optCloudClassCount) {
-      classCountForRangeOf1 = diff;
-    } 
-    /* Calculate size of range */
-    else if (diff > optCloudClassCount) {
-      range = Math.floor(diff / optCloudClassCount);
-    }
-
-    let bottomBorder = params.min;
-    let topBorder = bottomBorder + range;
-    /* Calculate size of additional end range */
-    const specialBorder = params.max - (params.max % optCloudClassCount + 1);
-
-    for (let i = 0; i < classCountForRangeOf1; i++) {
-      /* Check if count fits in any range */
-      if (bottomBorder <= count && count < topBorder) {
-        return optCloudClassPrefix + (i + 1);
-      } 
-      /* Check if count fits in additional end range */
-      else if (specialBorder <= count && diff > optCloudClassCount) {
-        return optCloudClassPrefix + optCloudClassCount;
-      } 
-      /* Check if count fits in end range (for range size of 1) */
-      else if (params.max === count && diff <= optCloudClassCount) {
-        return optCloudClassPrefix + classCountForRangeOf1;
-      } 
-      /* Enlarge range borders */
-      else {
-        bottomBorder += range;
-        topBorder += range;
-      }
-    }
+    return Math.floor((count - params.min) / (params.max - params.min) * (optCloudClassCount - 1) + 1);
   };
 
   const generateTags = function () {
@@ -210,7 +173,6 @@
     for (let tag in allTags) {
       /* [NEW] generate code of a link and add it to allTagsHTML */
       allTagsHTML += '<li><a href="#' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) + '"><span>' + tag + ' (' + allTags[tag] + ') ' + '</span></a></li>';
-      console.log(allTags[tag]);
       console.log(calculateTagClass(allTags[tag], tagsParams));
     }
     /* [NEW] END LOOP: for each tag in allTags: */
