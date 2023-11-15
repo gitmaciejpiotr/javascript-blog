@@ -279,10 +279,18 @@
 
   const addClickListenersToTags = function () {
     /* find all links to tags */
-    const linksToTags = document.querySelectorAll('.tags li');
+    const linksToTags = document.querySelectorAll('.post-tags .list li');
+    const linksToTagsInRightColumn = document.querySelectorAll('.tags li');
 
     /* START LOOP: for each link */
     for (let linkToTag of linksToTags) {
+      /* add tagClickHandler as event listener for that link */
+      linkToTag.addEventListener('click', tagClickHandler);
+    }
+    /* END LOOP: for each link */
+   
+    /* START LOOP: for each link */
+    for (let linkToTag of linksToTagsInRightColumn) {
       /* add tagClickHandler as event listener for that link */
       linkToTag.addEventListener('click', tagClickHandler);
     }
@@ -303,7 +311,7 @@
 
   /* Write function generateGrades similar to genrateTags func */
 
-  const generateGrades = function () {
+  const generateGradesLinks = function () {
     /* [NEW] create a new variable allGrades with an empty object */
     let allGrades = {};
 
@@ -322,7 +330,7 @@
       const grade = article.getAttribute('data-grade');
 
       /* generate HTML of the link */
-      const linkHTML = '<li><a href="#grade-' + grade + '">' + grade + '</a></li>';
+      const linkHTML = '<a href="#grade-' + grade + '">' + grade + '</a>';
 
       /* add generated code to html variable */
       html = html + linkHTML;
@@ -357,7 +365,7 @@
     gradesList.innerHTML = allGradesHTML;
   };
 
-  generateGrades();
+  generateGradesLinks();
 
 
   /* Write function gradeClickHandler similar to tagClickHandler func */
