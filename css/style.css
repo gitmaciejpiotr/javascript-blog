@@ -85,28 +85,28 @@ body {
 }
 
 /* Lists */
-.list {
+.list, .grades {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
-.list .active {
+.list .active, .grades .active {
   font-weight: bold;
 }
-.list li {
+.list li, .grades li {
   margin: 0 4px 0 4px;
 }
-.list li a {
+.list li a, .grades li a {
   text-decoration: none;
   transition: all 0.05s;
 }
-.list li a:hover {
+.list li a:hover, .grades li a:hover {
   color: white;
   text-shadow: black 1px 1px;
   text-decoration: underline;
   transition: all 0.05s;
 }
-.list li a:active {
+.list li a:active, .grades li a:active {
   color: -webkit-link;
   text-decoration: none;
   text-shadow: none;
@@ -118,7 +118,7 @@ body {
 }
 
 /* Tags */
-.tags {
+.sidebar .tags {
   display: inline;
 }
 

@@ -1,6 +1,66 @@
 'use strict';
 
 {
+  /* USEFUL CONSTS */
+
+  const optArticleSelector = '.post',
+    optTitleSelector = '.post-title',
+    optTitleListSelector = '.titles',
+    optArticleTagsSelector = '.post-tags .list',
+    optActiveTagLinksSelector = 'a.active[href^="#tag-"]',
+    optArticleGradeSelector = '.post-givenGrade',
+    optTagsListSelector = '.tags.list',
+    optCloudClassCount = 5,
+    optCloudClassPrefix = 'tag-size-',
+    optGradesListSelector = '.grades';
+
+
+
+
+
+  /* TITLE ACTIONS */
+
+
+
+
+  /* Generating title links */
+
+
+  const generateTitleLinks = function (customSelector = '') {
+
+    const articles = document.querySelectorAll(optArticleSelector + customSelector);
+    let html = '';
+
+    /* remove elements from list of links */
+    const titleList = document.querySelector(optTitleListSelector);
+    titleList.innerHTML = '';
+
+    /* FOR EACH ARTICLE */
+    for (let article of articles) {
+      /* read id and save it in const */
+      const articleId = article.getAttribute('id');
+
+      /* find element with title and save it in const */
+      const articleTitle = article.querySelector(optTitleSelector).innerHTML;
+
+      /* create html code with given data and save it in const */
+      const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+
+      /* paste created html code to list of links in left column */
+      html = html + linkHTML;
+    }
+
+    titleList.innerHTML = html;
+
+  };
+
+  generateTitleLinks();
+
+
+
+  /* Title click handler */
+
+
   const titleClickHandler = function (event) {
     console.log('Link was clicked!');
     console.log(event);
@@ -36,45 +96,9 @@
     correctArticle.classList.add('active');
   };
 
-  const optArticleSelector = '.post',
-    optTitleSelector = '.post-title',
-    optTitleListSelector = '.titles',
-    optArticleTagsSelector = '.post-tags .list',
-    optActiveTagLinksSelector = 'a.active[href^="#tag-"]',
-    optArticleAuthorSelector = '.post-givenGrade',
-    optTagsListSelector = '.tags.list',
-    optCloudClassCount = 5,
-    optCloudClassPrefix = 'tag-size-';
 
-  const generateTitleLinks = function (customSelector = '') {
+  /* Adding click handler to title links */
 
-    const articles = document.querySelectorAll(optArticleSelector + customSelector);
-    let html = '';
-
-    /* remove elements from list of links */
-    const titleList = document.querySelector(optTitleListSelector);
-    titleList.innerHTML = '';
-
-    /* FOR EACH ARTICLE */
-    for (let article of articles) {
-      /* read id and save it in const */
-      const articleId = article.getAttribute('id');
-
-      /* find element with title and save it in const */
-      const articleTitle = article.querySelector(optTitleSelector).innerHTML;
-
-      /* create html code with given data and save it in const */
-      const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
-
-      /* paste created html code to list of links in left column */
-      html = html + linkHTML;
-    }
-
-    titleList.innerHTML = html;
-
-  };
-
-  generateTitleLinks();
 
   const addTitleClickHandlerToLinks = function () {
     /* find all links to articles */
@@ -90,6 +114,19 @@
 
   addTitleClickHandlerToLinks();
 
+
+
+
+
+
+  /* TAGS ACTIONS */
+
+
+
+
+
+  /* Calculating min and max amount of tags usage */
+
   const calculateTagsParams = function (tags = '') {
     const firstValue = Object.values(tags)[0];
 
@@ -98,12 +135,10 @@
 
     for (let tag in tags) {
       if (tags[tag] < min) {
-        // console.log('Wartość min: ', min, '. Wartość tags[tag]: ', tags[tag]);
         min = tags[tag];
       }
 
       if (tags[tag] > max) {
-        // console.log('Wartość max: ', max, '. Wartość tags[tag]: ', tags[tag]);
         max = tags[tag];
       }
     }
@@ -112,6 +147,10 @@
     return params;
   };
 
+
+  /* Calculating tags classes */
+
+
   const calculateTagClass = function (count, params) {
     let classNumber = optCloudClassPrefix + Math.floor((count - params.min) / (params.max - params.min) * optCloudClassCount + 1);
     if (classNumber === 6) {
@@ -119,6 +158,10 @@
     }
     return classNumber;
   };
+
+
+  /* Generating tags */
+
 
   const generateTags = function () {
     /* [NEW] create a new variable allTags with an empty object */
@@ -162,8 +205,8 @@
       /* insert HTML of all the links into the tags wrapper */
       wrapper.innerHTML = wrapper.innerHTML + html;
     }
-
     /* END LOOP: for every article: */
+
 
     /* [NEW] find list of tags in right column */
     const tagList = document.querySelector(optTagsListSelector);
@@ -176,7 +219,7 @@
     /* [NEW] START LOOP: for each tag in allTags: */
     for (let tag in allTags) {
       /* [NEW] generate code of a link and add it to allTagsHTML */
-      allTagsHTML += '<li><a href="#' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) + '"><span>' + tag + '</span></a></li>';
+      allTagsHTML += '<li><a href="#tag-' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) + '"><span>' + tag + '</span></a></li>';
       console.log(calculateTagClass(allTags[tag], tagsParams));
     }
     /* [NEW] END LOOP: for each tag in allTags: */
@@ -186,6 +229,10 @@
   };
 
   generateTags();
+
+
+  /* Tags click handler */
+
 
   const tagClickHandler = function (event) {
     /* prevent default action for this event */
@@ -198,7 +245,7 @@
     /* make a new constant "href" and read the attribute "href" of the clicked element */
     const href = aElement.getAttribute('href');
 
-    /* make a new constant "tag" and extract tag from the "href" constant [???] */
+    /* make a new constant "tag" and extract tag from the "href" constant */
     const tag = href.replace('#tag-', '');
 
     /* find all tag links with class active */
@@ -226,9 +273,13 @@
     addTitleClickHandlerToLinks();
   };
 
+
+  /* Adding tag handler to tag links */
+
+
   const addClickListenersToTags = function () {
     /* find all links to tags */
-    const linksToTags = document.querySelectorAll('.post-tags .list li');
+    const linksToTags = document.querySelectorAll('.tags li');
 
     /* START LOOP: for each link */
     for (let linkToTag of linksToTags) {
@@ -236,21 +287,33 @@
       linkToTag.addEventListener('click', tagClickHandler);
     }
     /* END LOOP: for each link */
-
   };
 
   addClickListenersToTags();
 
+
+
+
+
+  /* GRADES ACTIONS */
+
+
+
+
+
   /* Write function generateGrades similar to genrateTags func */
 
   const generateGrades = function () {
+    /* [NEW] create a new variable allGrades with an empty object */
+    let allGrades = {};
+
     /* find all articles */
     const articlesAll = document.querySelectorAll('article');
 
     /* START LOOP: for every article: */
     for (let article of articlesAll) {
       /* find grade wrapper */
-      const wrapper = article.querySelector(optArticleAuthorSelector);
+      const wrapper = article.querySelector(optArticleGradeSelector);
 
       /* make html variable with empty string */
       let html = '';
@@ -259,16 +322,39 @@
       const grade = article.getAttribute('data-grade');
 
       /* generate HTML of the link */
-      const linkHTML = '<a href="#grade-' + grade + '">' + grade + '</a>';
+      const linkHTML = '<li><a href="#grade-' + grade + '">' + grade + '</a></li>';
 
       /* add generated code to html variable */
       html = html + linkHTML;
 
-      /* insert HTML of all the links into the tags wrapper */
-      wrapper.innerHTML = wrapper.innerHTML + html;
-    }
+      /* [NEW] check if this link is NOT already in allGrades */
+      if (!allGrades[grade]) {
+        /* [NEW] add generated code to allGrades array */
+        allGrades[grade] = 1;
+      } else {
+        allGrades[grade]++;
+      }
 
+      /* insert HTML of all the links into the tags wrapper */
+      wrapper.innerHTML += html;
+    }
     /* END LOOP: for every article: */
+
+    /* [NEW] find list of grades in right column */
+    const gradesList = document.querySelector(optGradesListSelector);
+
+    /* [NEW] create variable for all links HTML code */
+    let allGradesHTML = '';
+
+    /* [NEW] START LOOP: for each grade in allTags: */
+    for (let grade in allGrades) {
+      /* [NEW] generate code of a link and add it to allGradesHTML */
+      allGradesHTML += '<li><a href="#grade-' + grade + '"><span>' + grade + ' (' + allGrades[grade] + ') ' + '</span></a></li>';
+    }
+    /* [NEW] END LOOP: for each grade in allGrades: */
+
+    /* [NEW] add HTML from allGradesHTML to gradesList */
+    gradesList.innerHTML = allGradesHTML;
   };
 
   generateGrades();
@@ -313,9 +399,17 @@
   const addClickListenersToGrades = function () {
     /* find all links to grades */
     const linksToGrades = document.querySelectorAll('.post .post-givenGrade');
+    const linksToGradesInRightColumn = document.querySelectorAll('.grades li');
 
     /* START LOOP: for each link */
     for (let linkToGrade of linksToGrades) {
+      /* add tagClickHandler as event listener for that link */
+      linkToGrade.addEventListener('click', gradeClickHandler);
+    }
+    /* END LOOP: for each link */
+
+    /* START LOOP: for each link */
+    for (let linkToGrade of linksToGradesInRightColumn) {
       /* add tagClickHandler as event listener for that link */
       linkToGrade.addEventListener('click', gradeClickHandler);
     }

@@ -99,7 +99,7 @@ body {
 
 /* Lists */
 
-.list {
+.list, .grades {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -140,7 +140,7 @@ body {
 
 /* Tags */
 
-.tags {
+.sidebar .tags {
   display: inline;
 }
 
