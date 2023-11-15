@@ -2,20 +2,33 @@
 
 {
   /* USEFUL CONSTS */
+  const opts = {
+    tag: {
+      class: {
+        count: 5,
+        prefix: 'tag-size-',
+      }
+    }
+  };
 
-  const optArticleSelector = '.post',
-    optTitleSelector = '.post-title',
-    optTitleListSelector = '.titles',
-    optArticleTagsSelector = '.post-tags .list',
-    optActiveTagLinksSelector = 'a.active[href^="#tag-"]',
-    optArticleGradeSelector = '.post-givenGrade',
-    optTagsListSelector = '.tags.list',
-    optCloudClassCount = 5,
-    optCloudClassPrefix = 'tag-size-',
-    optGradesListSelector = '.grades';
+  const select = {
+    article: {
+      general: '.post',
+      title: '.post-title',
+      tags: '.post-tags .list',
+      grade: '.post-givenGrade',
+    },
+    listOf: {
+      titles: '.titles',
+      tags: '.tags.list',
+      grades: '.grades.list',
+    },
+    linksTo: {
+      activeTags: 'a.active[href^="#tag-"]',
+    },
+  };
 
-
-
+  
 
 
   /* TITLE ACTIONS */
@@ -28,11 +41,11 @@
 
   const generateTitleLinks = function (customSelector = '') {
 
-    const articles = document.querySelectorAll(optArticleSelector + customSelector);
+    const articles = document.querySelectorAll(select.article.general + customSelector);
     let html = '';
 
     /* remove elements from list of links */
-    const titleList = document.querySelector(optTitleListSelector);
+    const titleList = document.querySelector(select.listOf.titles);
     titleList.innerHTML = '';
 
     /* FOR EACH ARTICLE */
@@ -41,7 +54,7 @@
       const articleId = article.getAttribute('id');
 
       /* find element with title and save it in const */
-      const articleTitle = article.querySelector(optTitleSelector).innerHTML;
+      const articleTitle = article.querySelector(select.article.title).innerHTML;
 
       /* create html code with given data and save it in const */
       const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
@@ -152,7 +165,7 @@
 
 
   const calculateTagClass = function (count, params) {
-    let classNumber = optCloudClassPrefix + Math.floor((count - params.min) / (params.max - params.min) * optCloudClassCount + 1);
+    let classNumber = opts.tag.class.prefix + Math.floor((count - params.min) / (params.max - params.min) * opts.tag.class.count + 1);
     if (classNumber === 6) {
       return classNumber--;
     }
@@ -173,7 +186,7 @@
     /* START LOOP: for every article: */
     for (let article of articlesAll) {
       /* find tags wrapper */
-      const wrapper = article.querySelector(optArticleTagsSelector);
+      const wrapper = article.querySelector(select.article.tags);
 
       /* make html variable with empty string */
       let html = '';
@@ -209,7 +222,7 @@
 
 
     /* [NEW] find list of tags in right column */
-    const tagList = document.querySelector(optTagsListSelector);
+    const tagList = document.querySelector(select.listOf.tags);
 
     /* [NEW] create variable for all links HTML code */
     const tagsParams = calculateTagsParams(allTags);
@@ -249,7 +262,7 @@
     const tag = href.replace('#tag-', '');
 
     /* find all tag links with class active */
-    const tagLinksActive = document.querySelectorAll(optActiveTagLinksSelector);
+    const tagLinksActive = document.querySelectorAll(select.linksTo.activeTags);
 
     /* START LOOP: for each active tag link */
     for (let activeTagLink of tagLinksActive) {
@@ -321,7 +334,7 @@
     /* START LOOP: for every article: */
     for (let article of articlesAll) {
       /* find grade wrapper */
-      const wrapper = article.querySelector(optArticleGradeSelector);
+      const wrapper = article.querySelector(select.article.grade);
 
       /* make html variable with empty string */
       let html = '';
@@ -349,7 +362,7 @@
     /* END LOOP: for every article: */
 
     /* [NEW] find list of grades in right column */
-    const gradesList = document.querySelector(optGradesListSelector);
+    const gradesList = document.querySelector(select.listOf.grades);
 
     /* [NEW] create variable for all links HTML code */
     let allGradesHTML = '';
