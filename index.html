@@ -16,7 +16,8 @@
             <main class="wrapper">
                 <aside class="sidebar">
                     <h2 class="section-title">Kawiarnie</h2>
-                    <ul class="list titles"></ul>
+                    <ul class="list titles">
+                    </ul>
                 </aside>
                 <section class="options">
                     <div class="choose cafes">
@@ -60,7 +61,8 @@
                     </div>
                 </section>
                 <section class="posts">
-                    <article class="post active" id="article-1" data-tags="specialty filtry do_pracy" data-grade="trzeba">
+                    <article class="post active" id="article-1" data-tags="specialty filtry do_pracy"
+                        data-grade="trzeba">
                         <h3 class="post-title">Przystań na kawę</h3>
                         <p class="post-author">by Marion Berry</p>
                         <p class="post-givenGrade"><span class="question">Czy warto zajść?: </span></p>
@@ -311,6 +313,27 @@
         </div>
     </footer>
 
+    <script id="template-article-link" type="text/x-handlebars-template">
+        <li><a href="#{{ id }}"><span>{{ title }}</span></a></li>
+    </script>
+    <script id="template-article-givenGrade" type="text/x-handlebars-template">
+        <a href="#grade-{{ grade }}">{{ grade }}</a>
+    </script>
+    <script id="template-article-tag" type="text/x-handlebars-template">
+        <li><a href="#tag-{{ tag }}"><span>{{ tag }}</span></a></li>
+    </script>
+    <script id="template-article-tagCloudLink" type="text/x-handlebars-template">
+        {{#each tags}}
+        <li><a href="#tag-{{ tag }}" class="{{ className }}">{{ tag }}</a></li>
+        {{/each}}
+    </script>
+    <script id="template-article-givenGradesList" type="text/x-handlebars-template">
+        {{#each grades}}
+        <li><a href="#grade-{{ grade }}" class="{{ className }}"><span>{{ grade }} ({{ count }})</span></a></li>
+        {{/each}}
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 

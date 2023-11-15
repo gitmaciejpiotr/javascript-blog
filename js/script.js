@@ -1,7 +1,16 @@
 'use strict';
 
 {
-  /* USEFUL CONSTS */
+  const templates = {
+    articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+    articleTag: Handlebars.compile(document.querySelector('#template-article-tag').innerHTML),
+    articleGrade: Handlebars.compile(document.querySelector('#template-article-givenGrade').innerHTML),
+    tagCloudLink: Handlebars.compile(document.querySelector('#template-article-tagCloudLink').innerHTML),
+    givenGradesList: Handlebars.compile(document.querySelector('#template-article-givenGradesList').innerHTML),
+  }
+
+
+  /* USEFUL OBJECTS */
   const opts = {
     tag: {
       class: {
@@ -28,7 +37,7 @@
     },
   };
 
-  
+
 
 
   /* TITLE ACTIONS */
@@ -57,7 +66,8 @@
       const articleTitle = article.querySelector(select.article.title).innerHTML;
 
       /* create html code with given data and save it in const */
-      const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+      const linkHTMLData = { id: articleId, title: articleTitle };
+      const linkHTML = templates.articleLink(linkHTMLData);
 
       /* paste created html code to list of links in left column */
       html = html + linkHTML;
@@ -200,7 +210,8 @@
       /* START LOOP: for each tag */
       for (let tag of tagsArray) {
         /* generate HTML of the link */
-        const linkHTML = '<li><a href="#tag-' + tag + '">' + tag + '</a></li>';
+        const linkHTMLData = { tag: tag };
+        const linkHTML = templates.articleTag(linkHTMLData);
 
         /* add generated code to html variable */
         html = html + linkHTML;
@@ -227,18 +238,21 @@
     /* [NEW] create variable for all links HTML code */
     const tagsParams = calculateTagsParams(allTags);
     console.log('tagsParams:', tagsParams);
-    let allTagsHTML = '';
+    const allTagsData = {tags: []};
 
     /* [NEW] START LOOP: for each tag in allTags: */
     for (let tag in allTags) {
-      /* [NEW] generate code of a link and add it to allTagsHTML */
-      allTagsHTML += '<li><a href="#tag-' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) + '"><span>' + tag + '</span></a></li>';
-      console.log(calculateTagClass(allTags[tag], tagsParams));
+      /* [NEW] add tag object to allTagsData */
+      allTagsData.tags.push({
+        tag: tag,
+        count: allTags[tag],
+        className: calculateTagClass(allTags[tag], tagsParams)
+      });
     }
     /* [NEW] END LOOP: for each tag in allTags: */
 
-    /* [NEW] add HTML from allTagsHTML to tagList */
-    tagList.innerHTML = allTagsHTML;
+    /* [NEW] add HTML to tagList */
+    tagList.innerHTML = templates.tagCloudLink(allTagsData);
   };
 
   generateTags();
@@ -301,7 +315,7 @@
       linkToTag.addEventListener('click', tagClickHandler);
     }
     /* END LOOP: for each link */
-   
+
     /* START LOOP: for each link */
     for (let linkToTag of linksToTagsInRightColumn) {
       /* add tagClickHandler as event listener for that link */
@@ -343,7 +357,8 @@
       const grade = article.getAttribute('data-grade');
 
       /* generate HTML of the link */
-      const linkHTML = '<a href="#grade-' + grade + '">' + grade + '</a>';
+      const linkHTMLData = { grade: grade };
+      const linkHTML = templates.articleGrade(linkHTMLData);
 
       /* add generated code to html variable */
       html = html + linkHTML;
@@ -364,18 +379,21 @@
     /* [NEW] find list of grades in right column */
     const gradesList = document.querySelector(select.listOf.grades);
 
-    /* [NEW] create variable for all links HTML code */
-    let allGradesHTML = '';
+    /* [NEW] create object for all grades attributes */
+    const allGradesData = {grades: []};
 
     /* [NEW] START LOOP: for each grade in allTags: */
     for (let grade in allGrades) {
       /* [NEW] generate code of a link and add it to allGradesHTML */
-      allGradesHTML += '<li><a href="#grade-' + grade + '"><span>' + grade + ' (' + allGrades[grade] + ') ' + '</span></a></li>';
+      allGradesData.grades.push({
+        grade: grade,
+        count: allGrades[grade]
+      });
     }
     /* [NEW] END LOOP: for each grade in allGrades: */
 
-    /* [NEW] add HTML from allGradesHTML to gradesList */
-    gradesList.innerHTML = allGradesHTML;
+    /* [NEW] add HTML to gradesList */
+    gradesList.innerHTML = templates.givenGradesList(allGradesData);
   };
 
   generateGradesLinks();
